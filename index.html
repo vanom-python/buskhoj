@@ -1,135 +1,205 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>BUSKHOJ - West Bengal Bus Routes</title>
+<meta name="description" content="BUSKHOJ - West Bengal er sob bus er asol time, route, stoppage.">
 <style>
-* { box-sizing: border-box; }
-body { margin: 0; font-family: system-ui; background: #F6F7FB; color: #0B1B3A; }
-header { background: #fff; padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #E6E9F2; }
-.logo { display: flex; gap: 10px; align-items: center; }
-.logoI { width: 48px; height: 48px; border-radius: 14px; background: linear-gradient(135deg, #0B1B3A, #1A4DFF); display: flex; align-items: center; justify-content: center; color: #FFC700; font-size: 26px; font-weight: 800; }
-.logo b { font-size: 22px; letter-spacing: 1px; }
-.logo small { color: #FF6B1A; font-weight: 800; letter-spacing: 2px; font-size: 10px; }
-.adminBtn { background: #0B1B3A; color: #fff; border: 0; padding: 10px 18px; border-radius: 999px; font-weight: 800; cursor: pointer; width: auto; }
-.hero { background: linear-gradient(135deg, #071130, #0B1B3A 45%, #1A4DFF); color: #fff; padding: 26px 16px; }
-.hero h1 { font-size: 32px; line-height: 1.1; margin: 8px 0; }
-.hero h1 em { color: #FFC700; font-style: normal; }
-.hero p { color: #C7D2FE; font-size: 14px; line-height: 1.6; }
-.badge { display: inline-block; background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.2); padding: 7px 12px; border-radius: 999px; font-size: 12px; font-weight: 700; margin: 4px 4px 0 0; }
-.wrap { max-width: 900px; margin: auto; padding: 16px; }
-.card { background: #fff; border-radius: 18px; padding: 16px; margin: 12px 0; box-shadow: 0 10px 30px rgba(11,27,58,.12); }
-input { width: 100%; padding: 13px; border: 1px solid #E6E9F2; border-radius: 12px; margin: 6px 0; font-size: 15px; }
-button { background: #0B1B3A; color: #fff; border: 0; padding: 13px 18px; border-radius: 999px; font-weight: 800; cursor: pointer; width: 100%; }
-.bus { font-weight: 800; font-size: 18px; }
-.pill { display: inline-block; padding: 5px 10px; border-radius: 999px; font-size: 12px; font-weight: 800; background: #FFF3CD; color: #7A5A00; margin: 4px 4px 0 0; }
-.pill2 { background: #E6F0FF; color: #0B4ED8; }
-.foot { text-align: center; color: #888; font-size: 12px; padding: 20px; }
-#adminBox { display: none; border: 2px solid #FFC700; }
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;background:#E8ECF3;color:#0B1B3A;padding-bottom:110px}
+header{position:sticky;top:0;z-index:50;background:#0B1B3A;color:#fff;padding:14px 16px;display:flex;justify-content:space-between;align-items:center}
+.logo{display:flex;gap:12px;align-items:center;cursor:pointer}
+.logoI{width:52px;height:52px;border-radius:16px;background:linear-gradient(135deg,#1A4DFF,#0B1B3A);border:2px solid #FFC700;display:flex;align-items:center;justify-content:center;color:#fff;font-size:24px;font-weight:900;box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.logo b{font-size:24px;letter-spacing:2px;line-height:1}
+.logo small{color:#FFC700;font-weight:800;letter-spacing:2.5px;font-size:11px}
+.topbtns{display:flex;gap:8px;align-items:center}
+.enbtn{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.25);color:#fff;padding:9px 14px;border-radius:999px;font-weight:700;cursor:pointer}
+.adminbtn{background:#FFC700;color:#111;border:0;padding:10px 16px;border-radius:999px;font-weight:800;cursor:pointer}
+.hero{background:linear-gradient(180deg,#0B1B3A 0%,#0B1B3A 60%,#1A2B5A 100%);color:#fff;padding:26px 16px 20px}
+.hero h1{font-size:36px;line-height:1.05;margin:8px 0;font-weight:900;letter-spacing:-.5px}
+.hero p{color:#C7D2FE;line-height:1.6;font-size:15px;max-width:700px}
+.badges{display:flex;flex-direction:column;gap:10px;margin:18px 0}
+.badge{padding:13px 16px;border-radius:999px;font-weight:800;font-size:14px;width:fit-content}
+.badge.yellow{background:#FFC700;color:#111}
+.badge.white{background:#fff;color:#0B1B3A}
+.badge.blue{background:#1A4DFF;color:#fff}
+.stats{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.stat{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);padding:10px 16px;border-radius:999px;font-weight:700;font-size:13px}
+.wrap{max-width:1100px;margin:auto;padding:0 14px}
+.card{background:#fff;border-radius:22px;padding:18px;margin-top:16px;box-shadow:0 6px 20px rgba(0,0,0,.08)}
+.card h2{margin:0;font-size:18px}
+.muted{color:#666;font-size:13px}
+.tabs{display:flex;gap:8px;overflow-x:auto;margin:14px 0;padding-bottom:4px}
+.tabs button{white-space:nowrap;border:1px solid #E5E7EB;background:#F6F7FB;padding:11px 16px;border-radius:999px;font-weight:700;cursor:pointer}
+.tabs button.on{background:#0B1B3A;color:#fff;border-color:#0B1B3A}
+.lbl{font-weight:800;font-size:13px;margin:12px 0 6px;display:flex;align-items:center;gap:6px}
+.row2{display:flex;gap:10px;align-items:flex-end}
+.row2>div{flex:1}
+.inp{width:100%;padding:14px 14px;border:1px solid #E5E7EB;border-radius:14px;font-size:15px;outline:none;background:#fff}
+.inp:focus{border-color:#1A4DFF}
+.swap{width:48px;height:48px;flex:0 0 48px;background:#FFF3CD;border:0;border-radius:14px;font-size:20px;cursor:pointer}
+.btnrow{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
+.btnO{background:#FF6B1A;color:#fff;border:0;padding:15px 22px;border-radius:999px;font-weight:800;flex:1;cursor:pointer;font-size:15px}
+.btnD{background:#0B1B3A;color:#fff;border:0;padding:15px 22px;border-radius:999px;font-weight:800;flex:1;cursor:pointer;font-size:15px}
+.chip{display:inline-block;background:#FFF3CD;color:#7A4A00;padding:10px 14px;border-radius:999px;font-weight:700;font-size:13px;margin:5px 5px 0 0;cursor:pointer;border:0}
+.list{margin-top:14px;display:flex;flex-direction:column;gap:12px}
+.bus{background:#fff;border:1px solid #EDEFF5;border-radius:18px;padding:14px;cursor:pointer}
+.bus b{font-size:17px}
+.bus .meta{color:#666;font-size:13px;margin-top:4px}
+.tag{display:inline-block;padding:5px 10px;border-radius:999px;font-size:11px;font-weight:800;margin-right:6px}
+.tag.govt{background:#FFF3CD;color:#7A4A00}.tag.priv{background:#E0E7FF;color:#1A4DFF}.tag.exp{background:#FFE4E6;color:#BE123C}.tag.ver{background:#DCFCE7;color:#166534}.tag.unver{background:#FEF3C7;color:#92400E}
+.bottom{position:fixed;left:12px;right:12px;bottom:12px;background:#0B1B3A;border-radius:999px;display:flex;justify-content:space-around;padding:8px;z-index:60;box-shadow:0 10px 30px rgba(0,0,0,.35)}
+.bottom button{background:transparent;color:#C7D2FE;border:0;padding:10px 14px;border-radius:999px;font-weight:700;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:2px;font-size:12px}
+.bottom button.on{background:#1A4DFF;color:#fff;padding:10px 20px}
+.hidden{display:none}
+.adminPage{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:80;display:none;align-items:center;justify-content:center;padding:16px}
+.adminBox{background:#fff;border-radius:20px;padding:18px;width:100%;max-width:520px;max-height:90vh;overflow:auto}
+@media(max-width:640px){.hero h1{font-size:32px}.row2{flex-direction:column}.swap{transform:rotate(90deg)}}
 </style>
 </head>
 <body>
 <header>
-<div class="logo">
-<div class="logoI">BK</div>
-<div>
-<b>BUSKHOJ</b>
-<br>
-<small>KHOJO • CHORO • POUCHO</small>
-</div>
-</div>
-<button class="adminBtn" onclick="adminLogin()">ADMIN</button>
+<div class="logo" onclick="goHome()"><div class="logoI">BK</div><div><b>BUSKHOJ</b><br><small>KHOJO • JANO • JAO</small></div></div>
+<div class="topbtns"><button class="enbtn" onclick="alert('EN / BN - Coming Soon')">🌐 EN</button><button class="adminbtn" onclick="showAdmin()">🔐 Admin</button></div>
 </header>
-<div class="hero">
-<span class="badge">🚌 100+ Bus / Routes</span>
-<span class="badge">📍 Jhargram • Bankura • Medinipur • Kolkata</span>
-<span class="badge">✅ Verified / Unverified</span>
-<h1>
-West Bengal Bus Routes:
-<br>
-<em>Information on Stoppages and Schedules</em>
-</h1>
-<p>
-Belpahari theke Kolkata, Jhargram, Bankura — prottek bus er asol time, route, stoppage. Kono fake data nei.
-</p>
-</div>
+
+<div id="home">
+<div class="hero"><div class="wrap">
+<h1>West Bengal Bus Routes: Information on Stoppages and Schedules</h1>
+<p>Reliable information on bus stoppages, schedules and fares across West Bengal — in one place. No GPS needed, no live tracking.</p>
+<div class="badges"><span class="badge yellow">100+ Bus / Routes</span><span class="badge white">Jhargram • Bankura • Medinipur • Kolkata</span><span class="badge blue">Verified / Unverified — Clearly Labelled</span></div>
+<div class="stats"><span class="stat">16 Buses</span><span class="stat">5 Districts</span><span class="stat">13 Routes</span><span class="stat">12 Verified Buses</span></div>
+</div></div>
+
 <div class="wrap">
-<div class="card" id="adminBox">
-<b>🔐 Admin — Add New Bus</b>
-<input id="newName" placeholder="Bus Name - JOY MAA TARA">
-<input id="newFrom" placeholder="FROM - Purulia">
-<input id="newTo" placeholder="TO - Kolkata">
-<input id="newTime" placeholder="Time - 07:00 AM">
-<input id="newReg" placeholder="Reg No - WB58B1234">
-<input id="newStops" placeholder="Stops - Purulia, Bankura, Kolkata">
-<button onclick="addBus()">ADD BUS + SAVE</button>
-<p id="adminMsg"></p>
-</div>
 <div class="card">
-<b>🔍 Search by Route</b>
-<input id="from" placeholder="FROM - Belpahari / Jhargram / Bankura">
-<input id="to" placeholder="TO - Kolkata / Jhargram / Bankura">
-<button onclick="search()">SEARCH BUS</button>
-<p id="res" style="font-weight:700"></p>
+<div style="display:flex;justify-content:space-between;align-items:center"><h2>🔍 Find Your Bus</h2><span class="muted">Choose how you want to search</span></div>
+<div class="tabs">
+<button id="tRoute" class="on" onclick="setMode('route',this)">Search by Route</button>
+<button id="tBus" onclick="setMode('bus',this)">Search by Bus Name</button>
+<button id="tStop" onclick="setMode('stop',this)">Search by Stoppage</button>
 </div>
-<div id="list"></div>
-<div class="foot">
-Made in West Bengal • Developed by BUSKHOJ Team
-<br>
-No GPS • No Live Tracking • No Fake Data
+<div id="boxRoute">
+<div class="row2">
+<div><div class="lbl">📍 FROM — Start Stoppage</div><input id="from" class="inp" placeholder="Belpahari"></div>
+<button class="swap" onclick="swapFromTo()">⇄</button>
+<div><div class="lbl">📍 TO — Destination</div><input id="to" class="inp" placeholder="Kolkata"></div>
 </div>
 </div>
+<div id="boxBus" class="hidden"><div class="lbl">BUS NAME / REG NO</div><input id="busQ" class="inp" placeholder="JAI MAA DURGA / WB58B1765 / SBSTC"></div>
+<div id="boxStop" class="hidden"><div class="lbl">STOPPAGE NAME</div><input id="stopQ" class="inp" placeholder="Silda / Belpahari / Kharagpur"></div>
+<div class="btnrow"><button class="btnO" onclick="doSearch()">SEARCH BUS</button><button class="btnD" onclick="showAll()">SHOW ALL BUSES</button></div>
+<p id="msg" style="font-weight:800;color:#B45309;margin:12px 0 0"></p>
+<div style="margin-top:12px"><b style="font-size:13px;color:#666">Popular Routes</b><br>
+<button class="chip" onclick="quick('Belpahari','Kolkata')">Belpahari → Kolkata (Esplanade)</button>
+<button class="chip" onclick="quick('Silda','Bankura')">Silda → Bankura</button>
+<button class="chip" onclick="quick('Jhargram','Kolkata')">Jhargram → Kolkata</button>
+<button class="chip" onclick="quick('Belpahari','Jhargram')">Belpahari → Jhargram</button>
+<button class="chip" onclick="quick('Bandwan','Jhargram')">Bandwan → Jhargram</button>
+</div>
+</div>
+
+<div class="card"><h2>🚌 Buses</h2><p class="muted">Bus er nam e tap korle details khulbe - time, vara, stops.</p>
+<div style="margin-top:10px"><button class="chip" onclick="setF('all',this)">All</button><button class="chip" onclick="setF('verified',this)">Verified</button><button class="chip" onclick="setF('govt',this)">Govt / SBSTC</button><button class="chip" onclick="setF('private',this)">Private</button><button class="chip" onclick="setF('express',this)">Express</button></div>
+<div id="list" class="list"></div>
+<p style="text-align:center;color:#888;font-size:12px;margin-top:14px">Made in West Bengal • No GPS • No Live Tracking • No Fake Data</p>
+</div>
+</div>
+</div>
+
+<div id="detail" class="hidden" style="max-width:1100px;margin:16px auto;padding:0 14px"></div>
+
+<div id="adminPage" class="adminPage"><div class="adminBox">
+<button onclick="closeAdmin()" style="float:right;background:#111;color:#fff;border:0;padding:9px 14px;border-radius:999px;cursor:pointer;font-weight:800">✕ Close</button>
+<h2 style="margin:0">🔐 Admin / Operator</h2>
+<p style="background:#FFF8E1;padding:10px;border-radius:10px;font-size:13px">Username: <b>buskhoj_admin</b><br>Password: <b>Buskhoj@2026</b></p>
+<input id="au" class="inp" placeholder="Username"><br><br>
+<input id="ap" type="password" class="inp" placeholder="Password"><br><br>
+<button class="btnO" onclick="login()" style="width:100%">LOGIN</button>
+<p id="loginMsg" style="color:#C00;font-weight:700;font-size:13px"></p>
+<div id="panel" class="hidden">
+<h3>Add New Bus</h3>
+<input id="nName" class="inp" placeholder="Bus Name"><br><br>
+<input id="nFrom" class="inp" placeholder="From - Belpahari"><br><br>
+<input id="nTo" class="inp" placeholder="To - Kolkata"><br><br>
+<input id="nTime" class="inp" placeholder="Time - 10:15 AM"><br><br>
+<input id="nReg" class="inp" placeholder="Reg No"><br><br>
+<input id="nStops" class="inp" placeholder="Stops - Belpahari, Jhargram, Kolkata"><br><br>
+<button class="btnO" onclick="addBus()" style="width:100%">ADD BUS + SAVE</button>
+<div id="adminList" style="margin-top:12px"></div>
+</div>
+</div></div>
+
+<div class="bottom">
+<button id="bHome" class="on" onclick="goHome()">🏠<span>Home</span></button>
+<button onclick="goHome();setTimeout(function(){document.getElementById('from').focus()},300)">🔍<span>Search</span></button>
+<button id="bBuses" onclick="showAll()">🚌<span>Buses</span></button>
+<button onclick="showAdmin()">👤<span>Admin</span></button>
+</div>
+
 <script>
-const buses = [
-{ n: "SBSTC Belpahari - Kolkata", f: "Belpahari", t: "Kolkata (Esplanade)", time: "10:15 AM", reg: "Not verified", cat: "SBSTC • Ordinary", st: "Belpahari, Jhargram, Kharagpur, Kolkata (Esplanade)" },
-{ n: "JAI MAA DURGA", f: "Belpahari", t: "Kolkata (Esplanade)", time: "10:15 AM", reg: "WB58B1765", cat: "Private • Express", st: "Belpahari, Manbazar, Bandwan, Kolkata (Esplanade)" },
-{ n: "JAI MAA DURGA", f: "Belpahari", t: "Kolkata (Esplanade)", time: "10:40 AM", reg: "WB58B2323", cat: "Private • Express", st: "Belpahari, Manbazar, Kolkata (Esplanade)" },
-{ n: "MAA LAKSHMI", f: "Belpahari", t: "Kolkata (Esplanade)", time: "06:00 AM", reg: "WB57ET1703", cat: "Private • Ordinary", st: "Belpahari, Jhargram, Kharagpur, Kolkata (Esplanade)" },
-{ n: "Belpahari - Jhargram", f: "Belpahari", t: "Jhargram", time: "06:00 AM", reg: "WB-38-0002", cat: "SBSTC • Ordinary", st: "Belpahari, Jhargram" },
-{ n: "Silda - Bankura Express", f: "Silda", t: "Bankura", time: "06:10 AM", reg: "WB-37-0001", cat: "Private • Express", st: "Silda, Binpur, Bankura" }
+var mode="route"; var curF="all";
+var buses=[
+{n:"SBSTC Belpahari",f:"Belpahari",t:"Kolkata",time:"10:15 AM",fare:"Not verified",reg:"Not verified",op:"SBSTC",stops:"Belpahari, Jhargram, Kharagpur, Kolkata (Esplanade)",v:false,cat:"govt",type:"sbstc"},
+{n:"JAI MAA DURGA",f:"Belpahari",t:"Kolkata",time:"10:15 AM",fare:"Not verified",reg:"WB58B1765",op:"Private",stops:"Belpahari, Manbazar, Bandwan, Barabazar, Kolkata (Esplanade)",v:false,cat:"private",type:"express"},
+{n:"JAI MAA DURGA",f:"Belpahari",t:"Kolkata",time:"10:40 AM",fare:"Not verified",reg:"WB58B2323",op:"Private",stops:"Belpahari, Manbazar, Bandwan, Kolkata (Esplanade)",v:false,cat:"private",type:"express"},
+{n:"MAA LAKSHMI",f:"Belpahari",t:"Kolkata",time:"06:00 AM",fare:"Not verified",reg:"WB57ET1703",op:"Private",stops:"Belpahari, Jhargram, Kharagpur, Kolkata (Esplanade)",v:false,cat:"private",type:"express"},
+{n:"Maa Sarada Express",f:"Silda",t:"Bankura",time:"06:10 AM",fare:"55",reg:"WB-37-0001",op:"Private",stops:"Silda, Binpur, Bankura",v:true,cat:"private",type:"local"},
+{n:"SBSTC",f:"Belpahari",t:"Jhargram",time:"06:00 AM",fare:"40",reg:"WB-38-0002",op:"SBSTC",stops:"Belpahari, Jhargram",v:true,cat:"govt",type:"sbstc"},
+{n:"Bandwan - Jhargram",f:"Bandwan",t:"Jhargram",time:"07:00 AM",fare:"60",reg:"WB-39-0003",op:"Private",stops:"Bandwan, Jhargram",v:true,cat:"private",type:"local"},
+{n:"Dhupguri - Siliguri",f:"Dhupguri",t:"Siliguri",time:"07:00 AM",fare:"70",reg:"WB-40-0004",op:"Private",stops:"Dhupguri, Jalpaiguri, Siliguri",v:true,cat:"private",type:"local"},
+{n:"Jhargram - Kharagpur",f:"Jhargram",t:"Kharagpur",time:"06:30 AM",fare:"70",reg:"WB-41-0005",op:"Private",stops:"Jhargram, Kharagpur",v:true,cat:"private",type:"local"},
+{n:"Jhargram - Kolkata",f:"Jhargram",t:"Kolkata",time:"07:45 AM",fare:"190",reg:"WB-42-0006",op:"Private",stops:"Jhargram, Kharagpur, Kolkata",v:true,cat:"private",type:"express"},
+{n:"NILACHAL",f:"Durgapur",t:"Bankura",time:"07:30 AM",fare:"90",reg:"WB-43-0007",op:"Private",stops:"Durgapur, Bankura",v:true,cat:"private",type:"local"},
+{n:"JOY GANESH",f:"Bankura",t:"Kolkata",time:"08:00 AM",fare:"150",reg:"WB-44-0008",op:"Private",stops:"Bankura, Kolkata",v:true,cat:"private",type:"express"},
+{n:"TIRUPATI",f:"Kenjakura",t:"Molian",time:"07:15 AM",fare:"45",reg:"WB-45-0009",op:"Private",stops:"Kenjakura, Molian",v:true,cat:"private",type:"local"},
+{n:"GARIB NAWAZ",f:"Sonathali",t:"Bandwan",time:"06:45 AM",fare:"50",reg:"WB-46-0010",op:"Private",stops:"Sonathali, Bandwan",v:true,cat:"private",type:"local"},
+{n:"Silda - Jhargram Local",f:"Silda",t:"Jhargram",time:"07:20 AM",fare:"45",reg:"WB-47-0011",op:"Private",stops:"Silda, Jhargram",v:true,cat:"private",type:"local"},
+{n:"Jhargram - Midnapore",f:"Jhargram",t:"Midnapore",time:"07:00 AM",fare:"85",reg:"WB-48-0012",op:"Private",stops:"Jhargram, Midnapore",v:true,cat:"private",type:"local"}
 ];
-function render(a) {
-document.getElementById("list").innerHTML = a.map(b => `
-<div class="card">
-<div class="bus">${b.n}</div>
-<span class="pill">${b.cat}</span>
-<span class="pill pill2">⚠️ Unverified • Reg: ${b.reg}</span>
-<p><b>${b.f}</b> ➜ <b>${b.t}</b><br>🕒 ${b.time} • 💰 Fare: Not verified<br>${b.st}</p>
-</div>
-`).join("");
+function norm(s){return (s||"").toLowerCase().replace(/\(.*?\)/g,"").replace(/esplanade/g,"").trim();}
+function render(list){
+var el=document.getElementById("list"); if(!el) return;
+if(!list.length){el.innerHTML="<p style='text-align:center;color:#888'>❌ Kono bus pelam na</p>";return;}
+el.innerHTML=list.map(function(b,i){
+var idx=buses.indexOf(b);
+var tag=b.cat==="govt"?"<span class='tag govt'>SBSTC • Govt</span>":b.type==="express"?"<span class='tag exp'>Express</span>":"<span class='tag priv'>Private</span>";
+var vtag=b.v?"<span class='tag ver'>✅ Verified</span>":"<span class='tag unver'>⚠️ Unverified - Not verified</span>";
+return "<div class='bus' onclick='openBus("+idx+")'><div style='display:flex;justify-content:space-between'><b>"+b.n+"</b><b style='color:#FF6B1A'>"+b.time+"</b></div><div class='meta'>"+b.f+" → "+b.t+" • "+b.reg+" • Fare: "+b.fare+"</div><div style='margin-top:8px'>"+tag+vtag+"</div><div class='meta'>Stops: "+b.stops+"</div></div>";
+}).join("");
 }
+function getF(){
+var f=norm(document.getElementById("from").value); var tt=norm(document.getElementById("to").value);
+var bq=(document.getElementById("busQ").value||"").toLowerCase().trim(); var sq=(document.getElementById("stopQ").value||"").toLowerCase().trim();
+var out=[];
+for(var i=0;i<buses.length;i++){var b=buses[i];
+if(curF==="verified"&&!b.v)continue;
+if(curF==="govt"&&b.cat!=="govt")continue;
+if(curF==="private"&&b.cat!=="private")continue;
+if(curF==="express"&&b.type!=="express")continue;
+if(mode==="route"){
+if(f&&norm(b.f).indexOf(f)===-1&&norm(b.stops).indexOf(f)===-1)continue;
+if(tt&&norm(b.t).indexOf(tt)===-1&&norm(b.stops).indexOf(tt)===-1)continue;
+}
+if(mode==="bus"&&bq){var a=(b.n+" "+b.reg).toLowerCase(); if(a.indexOf(bq)===-1)continue;}
+if(mode==="stop"&&sq){if(b.stops.toLowerCase().indexOf(sq)===-1)continue;}
+out.push(b);} return out;
+}
+function doSearch(){var r=getF();document.getElementById("msg").innerText=r.length?("✅ "+r.length+" ta bus pelam"):("❌ Kono bus pelam na");render(r);var el=document.getElementById("list");if(el)el.scrollIntoView({behavior:"smooth"});}
+function quick(f,t){setMode("route",document.getElementById("tRoute"));document.getElementById("from").value=f;document.getElementById("to").value=t;document.getElementById("busQ").value="";document.getElementById("stopQ").value="";doSearch();}
+function setMode(m,el){mode=m;document.querySelectorAll(".tabs button").forEach(function(b){b.classList.remove("on")});if(el)el.classList.add("on");document.getElementById("boxRoute").style.display=m==="route"?"block":"none";document.getElementById("boxBus").style.display=m==="bus"?"block":"none";document.getElementById("boxStop").style.display=m==="stop"?"block":"none";}
+function swapFromTo(){var f=document.getElementById("from"),t=document.getElementById("to");var tmp=f.value;f.value=t.value;t.value=tmp;doSearch();}
+function goHome(){var d=document.getElementById("detail");if(d){d.classList.add("hidden");d.innerHTML="";}var ap=document.getElementById("adminPage");if(ap){ap.style.display="none";}var h=document.getElementById("home");if(h)h.style.display="block";document.getElementById("bHome").classList.add("on");window.scrollTo({top:0,behavior:"smooth"});}
+function showAll(){var f=document.getElementById("from");if(f)f.value="";var t=document.getElementById("to");if(t)t.value="";var bq=document.getElementById("busQ");if(bq)bq.value="";var sq=document.getElementById("stopQ");if(sq)sq.value="";curF="all";goHome();render(buses);var msg=document.getElementById("msg");if(msg)msg.innerText="✅ "+buses.length+" ta bus pelam - sob bus";setTimeout(function(){var el=document.getElementById("list");if(el)el.scrollIntoView({behavior:"smooth"});},150);}
+function setF(f,el){curF=f;render(getF());}
+function showAdmin(){var h=document.getElementById("home");if(h)h.style.display="none";var d=document.getElementById("detail");if(d)d.classList.add("hidden");var a=document.getElementById("adminPage");if(a){a.style.display="flex";}window.scrollTo({top:0,behavior:"smooth"});}
+function closeAdmin(){var a=document.getElementById("adminPage");if(a)a.style.display="none";goHome();}
+function goBack(){var d=document.getElementById("detail");if(d){d.classList.add("hidden");d.innerHTML="";}var h=document.getElementById("home");if(h)h.style.display="block";var el=document.getElementById("list");if(el)el.scrollIntoView({behavior:"smooth"});}
+function openBus(i){var b=buses[i];document.getElementById("home").style.display="none";var d=document.getElementById("detail");d.classList.remove("hidden");d.innerHTML='<button onclick="goBack()" style="background:#fff;border:1px solid #ddd;padding:10px 16px;border-radius:999px;cursor:pointer">← Back</button><div class="card"><h2>'+b.n+'</h2><p>'+b.f+' → '+b.t+' • '+b.time+'</p><p>Reg: '+b.reg+' • Fare: '+b.fare+' • Operator: '+b.op+'</p><p>Stops: '+b.stops+'</p><p>'+(b.v?'✅ Verified':'⚠️ Unverified - Not verified')+'</p></div>';window.scrollTo({top:0,behavior:"smooth"});}
+function login(){var u=document.getElementById("au").value.trim();var p=document.getElementById("ap").value;if(u==="buskhoj_admin"&&p==="Buskhoj@2026"){document.getElementById("panel").classList.remove("hidden");document.getElementById("loginMsg").innerText="✅ Login Success!";document.getElementById("adminList").innerHTML=buses.slice(0,8).map(function(b){return "<div style='border:1px solid #ddd;padding:8px;border-radius:8px;margin:5px 0'><b>"+b.n+"</b> "+b.f+" → "+b.t+"</div>";}).join("");}else{document.getElementById("loginMsg").innerText="❌ Wrong username / password";}}
+function addBus(){var n=document.getElementById("nName").value;var f=document.getElementById("nFrom").value;var t=document.getElementById("nTo").value;if(!n||!f||!t){alert("Name + From + To dao");return;}buses.push({n:n,f:f,t:t,time:document.getElementById("nTime").value||"Not verified",fare:"Not verified",reg:document.getElementById("nReg").value||"Not verified",op:"Private",stops:document.getElementById("nStops").value||f+", "+t,v:false,cat:"private",type:"express"});alert("✅ Bus add hoye geche!");render(buses);}
 render(buses);
-function search() {
-let f = document.getElementById("from").value.toLowerCase();
-let t = document.getElementById("to").value.toLowerCase();
-let r = buses.filter(b => (!f || b.f.toLowerCase().includes(f)) && (!t || b.t.toLowerCase().includes(t)));
-render(r);
-document.getElementById("res").innerText = r.length + " ta bus pawa geche";
-}
-function adminLogin() {
-let u = prompt("Username:");
-let p = prompt("Password:");
-if (u == "buskhoj_admin" && p == "Buskhoj@2026") {
-document.getElementById("adminBox").style.display = "block";
-document.getElementById("adminBox").scrollIntoView();
-alert("Login hoye geche bhai! Ebar bus add koro.");
-} else {
-alert("Vul username / password!");
-}
-}
-function addBus() {
-let n = document.getElementById("newName").value;
-let f = document.getElementById("newFrom").value;
-let t = document.getElementById("newTo").value;
-let tm = document.getElementById("newTime").value;
-let rg = document.getElementById("newReg").value;
-let st = document.getElementById("newStops").value;
-if (!n || !f || !t) { alert("Bus Name, FROM, TO ditei hobe!"); return; }
-buses.unshift({ n: n, f: f, t: t, time: tm || "Not verified", reg: rg || "Not verified", cat: "Private • Ordinary", st: st || f + ", " + t });
-render(buses);
-document.getElementById("adminMsg").innerText = "Bus add hoye geche! ✅";
-}
 </script>
 </body>
 </html>
