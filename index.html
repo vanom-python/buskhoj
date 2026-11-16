@@ -12,6 +12,7 @@ header { background: #fff; padding: 12px 16px; display: flex; justify-content: s
 .logoI { width: 48px; height: 48px; border-radius: 14px; background: linear-gradient(135deg, #0B1B3A, #1A4DFF); display: flex; align-items: center; justify-content: center; color: #FFC700; font-size: 26px; font-weight: 800; }
 .logo b { font-size: 22px; letter-spacing: 1px; }
 .logo small { color: #FF6B1A; font-weight: 800; letter-spacing: 2px; font-size: 10px; }
+.adminBtn { background: #0B1B3A; color: #fff; border: 0; padding: 10px 18px; border-radius: 999px; font-weight: 800; cursor: pointer; width: auto; }
 .hero { background: linear-gradient(135deg, #071130, #0B1B3A 45%, #1A4DFF); color: #fff; padding: 26px 16px; }
 .hero h1 { font-size: 32px; line-height: 1.1; margin: 8px 0; }
 .hero h1 em { color: #FFC700; font-style: normal; }
@@ -25,6 +26,7 @@ button { background: #0B1B3A; color: #fff; border: 0; padding: 13px 18px; border
 .pill { display: inline-block; padding: 5px 10px; border-radius: 999px; font-size: 12px; font-weight: 800; background: #FFF3CD; color: #7A5A00; margin: 4px 4px 0 0; }
 .pill2 { background: #E6F0FF; color: #0B4ED8; }
 .foot { text-align: center; color: #888; font-size: 12px; padding: 20px; }
+#adminBox { display: none; border: 2px solid #FFC700; }
 </style>
 </head>
 <body>
@@ -37,7 +39,7 @@ button { background: #0B1B3A; color: #fff; border: 0; padding: 13px 18px; border
 <small>KHOJO • CHORO • POUCHO</small>
 </div>
 </div>
-<b>ADMIN</b>
+<button class="adminBtn" onclick="adminLogin()">ADMIN</button>
 </header>
 <div class="hero">
 <span class="badge">🚌 100+ Bus / Routes</span>
@@ -53,6 +55,17 @@ Belpahari theke Kolkata, Jhargram, Bankura — prottek bus er asol time, route, 
 </p>
 </div>
 <div class="wrap">
+<div class="card" id="adminBox">
+<b>🔐 Admin — Add New Bus</b>
+<input id="newName" placeholder="Bus Name - JOY MAA TARA">
+<input id="newFrom" placeholder="FROM - Purulia">
+<input id="newTo" placeholder="TO - Kolkata">
+<input id="newTime" placeholder="Time - 07:00 AM">
+<input id="newReg" placeholder="Reg No - WB58B1234">
+<input id="newStops" placeholder="Stops - Purulia, Bankura, Kolkata">
+<button onclick="addBus()">ADD BUS + SAVE</button>
+<p id="adminMsg"></p>
+</div>
 <div class="card">
 <b>🔍 Search by Route</b>
 <input id="from" placeholder="FROM - Belpahari / Jhargram / Bankura">
@@ -93,6 +106,29 @@ let t = document.getElementById("to").value.toLowerCase();
 let r = buses.filter(b => (!f || b.f.toLowerCase().includes(f)) && (!t || b.t.toLowerCase().includes(t)));
 render(r);
 document.getElementById("res").innerText = r.length + " ta bus pawa geche";
+}
+function adminLogin() {
+let u = prompt("Username:");
+let p = prompt("Password:");
+if (u == "buskhoj_admin" && p == "Buskhoj@2026") {
+document.getElementById("adminBox").style.display = "block";
+document.getElementById("adminBox").scrollIntoView();
+alert("Login hoye geche bhai! Ebar bus add koro.");
+} else {
+alert("Vul username / password!");
+}
+}
+function addBus() {
+let n = document.getElementById("newName").value;
+let f = document.getElementById("newFrom").value;
+let t = document.getElementById("newTo").value;
+let tm = document.getElementById("newTime").value;
+let rg = document.getElementById("newReg").value;
+let st = document.getElementById("newStops").value;
+if (!n || !f || !t) { alert("Bus Name, FROM, TO ditei hobe!"); return; }
+buses.unshift({ n: n, f: f, t: t, time: tm || "Not verified", reg: rg || "Not verified", cat: "Private • Ordinary", st: st || f + ", " + t });
+render(buses);
+document.getElementById("adminMsg").innerText = "Bus add hoye geche! ✅";
 }
 </script>
 </body>
