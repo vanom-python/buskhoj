@@ -53,7 +53,6 @@ header{position:sticky;top:0;z-index:50;background:#0B1B3A;color:#fff;padding:14
 .bottom button{background:transparent;color:#C7D2FE;border:0;padding:10px 14px;border-radius:999px;font-weight:700;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:2px;font-size:12px}
 .bottom button.on{background:#1A4DFF;color:#fff;padding:10px 20px}
 .hidden{display:none}
-.tt{width:100%;border-collapse:collapse;margin-top:12px;font-size:14px}.tt th{background:#0B1B3A;color:#fff;padding:10px 8px;text-align:left}.tt td{padding:10px 8px;border-bottom:1px solid #eee}.pillU{background:#E0F2FE;color:#1A4DFF;padding:6px 10px;border-radius:999px;font-weight:800;font-size:12px}.pillD{background:#DCFCE7;color:#166534;padding:6px 10px;border-radius:999px;font-weight:800;font-size:12px}.noteBox{background:#FFF8E1;border:1px solid #FFE08A;padding:12px;border-radius:14px;margin-top:14px;line-height:1.7;font-size:14px}
 .adminPage{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:80;display:none;align-items:center;justify-content:center;padding:16px}
 .adminBox{background:#fff;border-radius:20px;padding:18px;width:100%;max-width:520px;max-height:90vh;overflow:auto}
 @media(max-width:640px){.hero h1{font-size:32px}.row2{flex-direction:column}.swap{transform:rotate(90deg)}}
@@ -70,7 +69,7 @@ header{position:sticky;top:0;z-index:50;background:#0B1B3A;color:#fff;padding:14
 <h1>West Bengal Bus Routes: Information on Stoppages and Schedules</h1>
 <p>Reliable information on bus stoppages, schedules and fares across West Bengal — in one place. No GPS needed, no live tracking.</p>
 <div class="badges"><span class="badge yellow">100+ Bus / Routes</span><span class="badge white">Jhargram • Bankura • Medinipur • Kolkata</span><span class="badge blue">Verified / Unverified — Clearly Labelled</span></div>
-<div class="stats"><span class="stat">17 Buses</span><span class="stat">5 Districts</span><span class="stat">13 Routes</span><span class="stat">12 Verified Buses</span></div>
+<div class="stats"><span class="stat">16 Buses</span><span class="stat">5 Districts</span><span class="stat">13 Routes</span><span class="stat">12 Verified Buses</span></div>
 </div></div>
 
 <div class="wrap">
@@ -127,8 +126,8 @@ header{position:sticky;top:0;z-index:50;background:#0B1B3A;color:#fff;padding:14
 <input id="nTime" class="inp" placeholder="Time - 10:15 AM"><br><br>
 <input id="nReg" class="inp" placeholder="Reg No"><br><br>
 <input id="nStops" class="inp" placeholder="Stops - Belpahari, Jhargram, Kolkata"><br><br>
-<button class="btnO" onclick="addBus()" style="width:100%">ADD BUS + SAVE</button><p id="addMsg" style="font-weight:800;color:#B45309"></p>
-<h3 style="margin-top:20px">🕐 Sob Bus er Stop Time Edit Koro</h3><p style="font-size:13px;color:#666">Bus select koro → Up / Down time likho → SAVE koro</p><select id="editBusSel" class="inp" onchange="loadTTEditor()"></select><br><br><div id="ttEditor"></div><button class="btnD" onclick="saveTT()" style="width:100%;margin-top:10px">💾 TIMETABLE SAVE KORO</button><p id="ttMsg" style="font-weight:800;color:green"></p><div id="adminList" style="margin-top:12px"></div>
+<button class="btnO" onclick="addBus()" style="width:100%">ADD BUS + SAVE</button>
+<div id="adminList" style="margin-top:12px"></div>
 </div>
 </div></div>
 
@@ -142,7 +141,6 @@ header{position:sticky;top:0;z-index:50;background:#0B1B3A;color:#fff;padding:14
 <script>
 var mode="route"; var curF="all";
 var buses=[
-{n:"KALYAN",f:"Jhargram",t:"Purulia",time:"05:00 AM",fare:"Not verified",reg:"WB55B8822",op:"Private",stops:"Jhargram, Dahijuri, Binpur, Silda, Belpahari, Banspahari, Tamajuri, Poradih, Bandwan, Manbazar, Puncha, Lalpur, Lakshanpur, Ladhurka, Purulia",v:false,cat:"private",type:"express",timetable:[["Jhargram","5:00 AM","5:30 PM"],["Dahijuri","5:15 AM","5:20 PM"],["Binpur","--:--","--:--"],["Silda","5:45 AM","4:45 PM"],["Belpahari","6:00 AM","4:25 PM"],["Banspahari","--:--","--:--"],["Tamajuri","--:--","--:--"],["Poradih","--:--","--:--"],["Bandwan","7:30 AM","3:00 PM"],["Manbazar","8:30 AM","2:10 PM"],["Puncha","9:00 AM","1:25 PM"],["Lalpur","9:40 AM","12:55 PM"],["Lakshanpur","--:--","--:--"],["Ladhurka","--:--","--:--"],["Purulia","10:40 AM","11:50 AM"]],notes:"KALYAN (কল্যাণ) - WB55B8822 | JHARGRAM - MANBAZAR - PURULIA | ঝাড়গ্রাম - বান্দোয়ান - মানবাজার - পুরুলিয়া | Via:- ঝাড়গ্রাম, দহিজুড়ী, বিনপুর, শিলদা, বেলপাহাড়ী, বাঁশপাহাড়ী, তামাজুড়ী, পোড়াডিহ, বান্দোয়ান, মানবাজার, পুঞ্চা, লালপুর, লক্ষণপুর, লধুরকা, পুরুলিয়া।"},
 {n:"SBSTC Belpahari",f:"Belpahari",t:"Kolkata",time:"10:15 AM",fare:"Not verified",reg:"Not verified",op:"SBSTC",stops:"Belpahari, Jhargram, Kharagpur, Kolkata (Esplanade)",v:false,cat:"govt",type:"sbstc"},
 {n:"JAI MAA DURGA",f:"Belpahari",t:"Kolkata",time:"10:15 AM",fare:"Not verified",reg:"WB58B1765",op:"Private",stops:"Belpahari, Manbazar, Bandwan, Barabazar, Kolkata (Esplanade)",v:false,cat:"private",type:"express"},
 {n:"JAI MAA DURGA",f:"Belpahari",t:"Kolkata",time:"10:40 AM",fare:"Not verified",reg:"WB58B2323",op:"Private",stops:"Belpahari, Manbazar, Bandwan, Kolkata (Esplanade)",v:false,cat:"private",type:"express"},
@@ -198,10 +196,10 @@ function setF(f,el){curF=f;render(getF());}
 function showAdmin(){var h=document.getElementById("home");if(h)h.style.display="none";var d=document.getElementById("detail");if(d)d.classList.add("hidden");var a=document.getElementById("adminPage");if(a){a.style.display="flex";}window.scrollTo({top:0,behavior:"smooth"});}
 function closeAdmin(){var a=document.getElementById("adminPage");if(a)a.style.display="none";goHome();}
 function goBack(){var d=document.getElementById("detail");if(d){d.classList.add("hidden");d.innerHTML="";}var h=document.getElementById("home");if(h)h.style.display="block";var el=document.getElementById("list");if(el)el.scrollIntoView({behavior:"smooth"});}
-function getTT(b){
-if(b.timetable) return b.timetable;
-var parts=b.stops.split(","); var out=[];
-for(var i=0;i<parts.length;i++){
-var up = i===0? b.time : "--:--";
-var down = i===parts.length-1? b.time : "--:--";
-if(i===
+function openBus(i){var b=buses[i];document.getElementById("home").style.display="none";var d=document.getElementById("detail");d.classList.remove("hidden");d.innerHTML='<button onclick="goBack()" style="background:#fff;border:1px solid #ddd;padding:10px 16px;border-radius:999px;cursor:pointer">← Back</button><div class="card"><h2>'+b.n+'</h2><p>'+b.f+' → '+b.t+' • '+b.time+'</p><p>Reg: '+b.reg+' • Fare: '+b.fare+' • Operator: '+b.op+'</p><p>Stops: '+b.stops+'</p><p>'+(b.v?'✅ Verified':'⚠️ Unverified - Not verified')+'</p></div>';window.scrollTo({top:0,behavior:"smooth"});}
+function login(){var u=document.getElementById("au").value.trim();var p=document.getElementById("ap").value;if(u==="buskhoj_admin"&&p==="Buskhoj@2026"){document.getElementById("panel").classList.remove("hidden");document.getElementById("loginMsg").innerText="✅ Login Success!";document.getElementById("adminList").innerHTML=buses.slice(0,8).map(function(b){return "<div style='border:1px solid #ddd;padding:8px;border-radius:8px;margin:5px 0'><b>"+b.n+"</b> "+b.f+" → "+b.t+"</div>";}).join("");}else{document.getElementById("loginMsg").innerText="❌ Wrong username / password";}}
+function addBus(){var n=document.getElementById("nName").value;var f=document.getElementById("nFrom").value;var t=document.getElementById("nTo").value;if(!n||!f||!t){alert("Name + From + To dao");return;}buses.push({n:n,f:f,t:t,time:document.getElementById("nTime").value||"Not verified",fare:"Not verified",reg:document.getElementById("nReg").value||"Not verified",op:"Private",stops:document.getElementById("nStops").value||f+", "+t,v:false,cat:"private",type:"express"});alert("✅ Bus add hoye geche!");render(buses);}
+render(buses);
+</script>
+</body>
+</html>
