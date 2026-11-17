@@ -127,8 +127,8 @@ header{position:sticky;top:0;z-index:50;background:#0B1B3A;color:#fff;padding:14
 <input id="nTime" class="inp" placeholder="Time - 10:15 AM"><br><br>
 <input id="nReg" class="inp" placeholder="Reg No"><br><br>
 <input id="nStops" class="inp" placeholder="Stops - Belpahari, Jhargram, Kolkata"><br><br>
-<button class="btnO" onclick="addBus()" style="width:100%">ADD BUS + SAVE</button>
-<div id="adminList" style="margin-top:12px"></div>
+<button class="btnO" onclick="addBus()" style="width:100%">ADD BUS + SAVE</button><p id="addMsg" style="font-weight:800;color:#B45309"></p>
+<h3 style="margin-top:20px">🕐 Sob Bus er Stop Time Edit Koro</h3><p style="font-size:13px;color:#666">Bus select koro → Up / Down time likho → SAVE koro</p><select id="editBusSel" class="inp" onchange="loadTTEditor()"></select><br><br><div id="ttEditor"></div><button class="btnD" onclick="saveTT()" style="width:100%;margin-top:10px">💾 TIMETABLE SAVE KORO</button><p id="ttMsg" style="font-weight:800;color:green"></p><div id="adminList" style="margin-top:12px"></div>
 </div>
 </div></div>
 
@@ -204,12 +204,4 @@ var parts=b.stops.split(","); var out=[];
 for(var i=0;i<parts.length;i++){
 var up = i===0? b.time : "--:--";
 var down = i===parts.length-1? b.time : "--:--";
-if(i===0) down="--:--";
-if(i===parts.length-1) up=b.time;
-out.push([parts[i].trim(), up, down]);
-}
-return out;
-}
-function openBus(i){var b=buses[i];document.getElementById("home").style.display="none";var d=document.getElementById("detail");d.classList.remove("hidden");
-var tt=getTT(b);
-var rows=tt.map(function(r,idx){return "<tr><td><b style='background:"+(idx===0?"#1A4DFF":"#E5E7EB")+";color:"+(idx===0?"#fff":"#111")+";padding:6px 11px;border-radius:999px'>"+(idx+1)+"</b></td><td><spa
+if(i===
